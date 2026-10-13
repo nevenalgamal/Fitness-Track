@@ -35,3 +35,22 @@ export async function createActivity(token, activity) {
     throw Error(result.message);
   }
 }
+//  Delete  an Activity  by ID using the user's token.
+ export async  function deletActivity(token, id) {
+  if(!token){
+    throw Error ("You must be signed in to delete an activity.")
+  }
+   const response = await fetch(API + "/activities/" + id ,{
+    method: "DELETE",
+    headers : {"Content-Type": "application/json",
+      Authorization: "Bearer "  + token,
+    },
+  });
+
+  if (!response.ok){
+    const resutt = await response.json();
+    throw Error( resutt.message)
+  }
+}
+
+
